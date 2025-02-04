@@ -8,7 +8,7 @@ Clone the repository and install dependencies:
 
 git clone https://github.com/dareayanwale/Checkout.com_Task.git
 
-cd checkout.com
+cd Checkout.com_Task
 
 npm install
 
