@@ -1,0 +1,231 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>Checkout:Order Form</title>
+</head>
+
+<body class="bg-light">
+
+    <div class"container">
+        <div class="py-5 text-center">
+                <h1>Checkout Form</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 order-2">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class=text-muted>Your Cart</span>
+                    <span class="badge rounded-pill bg-secondary">3</span>
+                </h4>
+
+                <div class="card" style="">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Zenova </h6>
+                            <small class="text-muted">A sleek and futuristic name for a tech or wellness
+                                product.</small>
+                        </div>
+                        <span class="text-muted">£12</span>
+                    </li>
+                </div>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">EchoPure</h6>
+                        <small class="text-muted">A good fit for an eco-friendly water or air purifier</small>
+                    </div>
+                    <span class="text-muted">£8</span>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">TastyByte</h6>
+                        <small class="text-muted"> A strong name for an energy drink or a power-related gadget.</small>
+                    </div>
+                    <span class="text-muted">£5</span>
+                </li>
+
+
+
+                <div class="card-footer d-flex justify-content-between">
+                    <span>Total (GBP)</span>
+                    <strong>£25</strong>
+                </div>
+
+            </div>
+
+            <div class="col-md-8 order-1">
+                <h4 class="mb-3">Billing Address</h4>
+                <form id="checkout-form" action="#" method="POST" novalidate>
+                    <div class="row">
+                        <div class="col mb-4">
+                            <label for="First name"> First Name </label>
+                            <input type="text" class="form-control" placeholder="First name" aria-label="First name"
+                                value="John" name="firstName">
+                        </div>
+                        <div class="col mb-4">
+                            <label for="Last name"> Last Name </label>
+                            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name"
+                                value="Doe" name="lastName">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="amount" value="25">
+
+                    <div class="mb-4">
+                        <label for="email">Email </label>
+                        <input type="text" class="form-control" placeholder="you@example.com" aria-label="email"
+                            value="john.doe@example.com" name="email">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="Address">Address</label>
+                        <input type="text" class="form-control" placeholder="1234 Main St" aria-label="Address"
+                            value="1234 Main St" name="address">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="Address2">Address 2 (optional)</label>
+                        <input type="text" class="form-control" placeholder="Appartment or suite" aria-label="Address2"
+                            value="Apt 101" name="address2">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="country">Country</label>
+                            <select class="form-select" name="country">
+                                <option selected>Choose...</option>
+                                <option value="GB" selected>United Kingdom</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="state">City</label>
+                            <select class="form-select" name="city">
+                                <option selected>Choose...</option>
+                                <option value="London" selected>London</option>
+                                <option value="Birmingham">Birmingham</option>
+                                <option value="Conventy">Conventy</option>
+                            </select>
+                        </div>
+                        <div class="col mb-4">
+                            <label for="zip">Post Code</label>
+                            <input type="text" class="form-control" aria-label="zip" value="SW1A 1AA" name="postcode">
+                        </div>
+
+
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                Continue to Payment
+                            </button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="flow-container"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    <script src="https://checkout-web-components.checkout.com/index.js"></script>
+
+    <!-- Form Validation Script -->
+    <script>
+        (function () {
+            "use strict";
+            const PUBLIC_KEY = "";
+            var form = document.getElementById("checkout-form");
+
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Check if form is valid
+                if (!form.checkValidity()) {
+                    event.stopPropagation();
+                    form.classList.add("was-validated");
+                    return;
+                }
+
+                form.classList.add("was-validated"); // Show validation styles
+
+                // Convert form data to JSON
+                const formData = new FormData(form);
+                const jsonData = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch("/checkout/process-payment", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(jsonData),
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        console.error("Error creating payment session", result);
+                        return;
+                    }
+
+
+                    console.log("Payment Response:", result);
+
+                    const checkout = await CheckoutWebComponents({
+                        paymentSession: result,
+                        publicKey: PUBLIC_KEY,
+                        environment: "sandbox",
+                        locale: "en-GB",
+                        onReady: () => {
+                            console.log("onReady");
+                        },
+                        onPaymentCompleted: (_component, paymentResponse) => {
+                            console.log("Create Payment with PaymentId: ", paymentResponse.id);
+                        },
+                        onChange: (component) => {
+                            console.log(
+                                `onChange() -> isValid: "${component.isValid()}" for "${component.type
+                                }"`,
+                            );
+                        },
+                        onError: (component, error) => {
+                            console.log("onError", error, "Component", component.type);
+                        },
+                    });
+
+                    const flowComponent = checkout.create("flow");
+
+                    flowComponent.mount(document.getElementById("flow-container"));
+
+
+                } catch (error) {
+                    console.error("Payment Error:", error);
+                    alert("Payment request failed.");
+                }
+            }, false);
+        })();
+    </script>
+
+</body>
+
+</html>

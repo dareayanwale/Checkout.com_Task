@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .card
+    if status === 'succeeded'
+      h1 Success
+      p We received your purchase request;
+        br
+        | We'll be in touch shortly!
+    else
+      h1 Payment Failed
+      p Oops! Something went wrong with your payment.
+        br
+        | Please try again or contact support.
+
+    a.btn.btn-primary(href="/") Return Home
